@@ -7,7 +7,7 @@ package model.data_structures;
  * @author Fernando De la Rosa
  *
  */
-public class ArregloDinamico implements IArregloDinamico {
+public class ArregloDinamico<T extends Comparable<T>> implements IArregloDinamico<T> {
 		/**
 		 * Capacidad maxima del arreglo
 		 */
@@ -19,7 +19,7 @@ public class ArregloDinamico implements IArregloDinamico {
         /**
          * Arreglo de elementos de tamaNo maximo
          */
-        private String elementos[ ];
+        private T elementos[ ];
 
         /**
          * Construir un arreglo con la capacidad maxima inicial.
@@ -27,26 +27,27 @@ public class ArregloDinamico implements IArregloDinamico {
          */
 		public ArregloDinamico( int max )
         {
-               elementos = new String[max];
-               tamanoMax = max;
-               tamanoAct = 0;
+			elementos =(T[]) new Comparable[max];
+			tamanoMax = max;
+			tamanoAct = 0;
+              
         }
         
-		public void agregar( String dato )
+		public void agregar( T dato )
         {
-               if ( tamanoAct == tamanoMax )
-               {  // caso de arreglo lleno (aumentar tamaNo)
-                    tamanoMax = 2 * tamanoMax;
-                    String [ ] copia = elementos;
-                    elementos = new String[tamanoMax];
-                    for ( int i = 0; i < tamanoAct; i++)
-                    {
-                     	 elementos[i] = copia[i];
-                    } 
-            	    System.out.println("Arreglo lleno: " + tamanoAct + " - Arreglo duplicado: " + tamanoMax);
-               }	
-               elementos[tamanoAct] = dato;
-               tamanoAct++;
+			if ( tamanoAct == tamanoMax )
+			{  // caso de arreglo lleno (aumentar tamaNo)
+				tamanoMax = 2 * tamanoMax;
+				T [ ] copia = elementos;
+				elementos =(T[]) new Comparable[tamanoMax];
+				for ( int i = 0; i < tamanoAct; i++)
+				{
+					elementos[i] = copia[i];
+				} 
+				System.out.println("Arreglo lleno: " + tamanoAct + " - Arreglo duplicado: " + tamanoMax);
+			}	
+			elementos[tamanoAct] = dato;
+			tamanoAct++;
        }
 
 		public int darCapacidad() {
@@ -57,21 +58,62 @@ public class ArregloDinamico implements IArregloDinamico {
 			return tamanoAct;
 		}
 
-		public String darElemento(int i) {
-			// TODO implementar
-			return null;
+		public  T darElemento(int i) {
+			return i < tamanoAct && i >= 0? elementos[i]:null;
 		}
 
-		public String buscar(String dato) {
-			// TODO implementar
-			// Recomendacion: Usar el criterio de comparacion natural (metodo compareTo()) definido en Strings.
+		
+		public T buscar(T dato) {
+			int i = 0;
+			T a = elementos[0];
+			while(i < elementos.length && a != null)
+			{
+				if(a.compareTo(dato) == 0 )
+					return (T) a;
+				i++;
+				a = elementos[i];
+			}
+
 			return null;
+			}
+
+		public T eliminar(T dato) {
+
+			int i = 0;
+			T resp = null;
+			while(i < elementos.length && resp == null)
+			{
+				T act = elementos[i];
+				if(dato.compareTo(act) == 0)
+				{
+					resp = act;
+					elementos[i] = null;
+					i--;
+				}
+				i++;
+			}
+			if(resp != null)
+			{
+				while(i+1< elementos.length)
+				{
+					elementos[i] = elementos[i+1];
+					i++;
+				}
+			}
+			return (T) resp;
 		}
 
-		public String eliminar(String dato) {
-			// TODO implementar
-			// Recomendacion: Usar el criterio de comparacion natural (metodo compareTo()) definido en Strings.
-			return null;
+		@Override
+		public void invertir() {
+			T [] invertido = elementos =(T[]) new Comparable[elementos.length];
+	        for(int i=0;i<elementos.length;i++){
+	            invertido[i] = elementos[elementos.length-1-i];
+	        }
+	        elementos = invertido;
+	        
+			
 		}
 
-}
+
+		
+		}

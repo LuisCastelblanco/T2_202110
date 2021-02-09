@@ -42,5 +42,11 @@ public interface IArregloDinamico {
 	 * @return dato eliminado
 	 */
 	String eliminar( String dato );
+	/**
+	 * Invierte el contenido de los elementos genéricos T en el ArregloDinamico
+	 * @param dato
+	 * @return
+	 */
+	String invertir ( String dato);
 
 }

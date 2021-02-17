@@ -3,9 +3,9 @@ package model.data_structures;
 import java.util.Arrays;
 
 /**
- * 2019-01-23
- * Estructura de Datos Arreglo Dinamico de Strings.
- * El arreglo al llenarse (llegar a su maxima capacidad) debe aumentar su capacidad.
+ * 2019-01-23 Estructura de Datos Arreglo Dinamico de Strings. El arreglo al
+ * llenarse (llegar a su maxima capacidad) debe aumentar su capacidad.
+ * 
  * @author Fernando De la Rosa
  *
  */
@@ -96,10 +96,13 @@ public class ArregloDinamico<T extends Comparable<T>> implements ILista<T> {
 		public int darCapacidad() {
 			return tamanoMax;
 		}
+		elementos[tamanoAct] = dato;
+		tamanoAct++;
+	}
 
-		public int darTamano() {
-			return tamanoAct;
-		}
+	public int darCapacidad() {
+		return tamanoMax;
+	}
 
 		public  T darElemento(int i) {
 			return i < tamanoAct && i >= 0? elementos[i]:null;

@@ -1,5 +1,11 @@
 package model.logic;
 
+import java.io.FileReader;
+import java.io.Reader;
+
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVRecord;
+
 import model.data_structures.ArregloDinamico;
 import model.data_structures.IArregloDinamico;
 
@@ -13,13 +19,17 @@ public class Modelo {
 	 */
 	private IArregloDinamico datos;
 	
+	private ILista<T> datosVideos;
+	
 	/**
 	 * Constructor del modelo del mundo con capacidad predefinida
 	 */
 	public Modelo()
 	{
 		datos = new ArregloDinamico(7);
+		datosVideos= new ListaEncadenada<T>;
 	}
+	
 	
 	/**
 	 * Constructor del modelo del mundo con capacidad dada
@@ -67,6 +77,29 @@ public class Modelo {
 	{
 		return datos.eliminar(dato);
 	}
-
-
+	/**
+	 * Metodo que carga los datos de los videos
+	 */
+	public void cargar(String[] args){
+		
+		Reader in = new FileReader("/esqueleto_T0_202010/data/videos-small.csv");
+		
+		Iterable<CSVRecord> records = CSVFormat.EXCEL.parse(in);
+		for (CSVRecord record : records) {
+		    String PrimerVideo = record.get(1);
+		    String UltimoVideo = record.get(record.size());
+		    int TotalVideos= record.size();
+		    
+		    
+		    datos.agregar(PrimerVideo);
+		    datosVideos.agregar(PrimerVideo);
+		    datos.agregar(UltimoVideo);
+		    datosVideos.agregar(UltimoVideo);
+		    datos.agregar(TotalVideos);
+		    datosVideos.agregar(TotalVideos);
+		    
+		    ;
+		}
+	}
+	
 }

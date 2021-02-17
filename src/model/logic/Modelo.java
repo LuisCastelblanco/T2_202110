@@ -98,7 +98,7 @@ public class Modelo {
 		    datos.agregar(TotalVideos);
 		    datosVideos.agregar(TotalVideos);
 		    
-		    ;
+		    
 		}
 	}
 	

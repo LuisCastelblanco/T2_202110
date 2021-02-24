@@ -36,9 +36,9 @@ public class ArregloDinamico<T extends Comparable<T>> implements ILista<T> {
         }
         
 		public void agregar( T dato )
-        {
+		{
 			if ( tamanoAct == tamanoMax )
-			{  
+			{  // caso de arreglo lleno (aumentar tamaNo)
 				tamanoMax = 2 * tamanoMax;
 				T [ ] copia = elementos;
 				elementos =(T[]) new Comparable[tamanoMax];
@@ -50,7 +50,7 @@ public class ArregloDinamico<T extends Comparable<T>> implements ILista<T> {
 			}	
 			elementos[tamanoAct] = dato;
 			tamanoAct++;
-       }
+		}
 		
 		/**
          * Agrega un elemento al incio de una lista.
